@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMS Digital Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+    }
+    header, section, footer {
+      padding: 60px 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .hero {
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: #aaa;
+    }
+    .services {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .service-card {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .service-card h3 {
+      margin-top: 0;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+    form button {
+      padding: 12px 30px;
+      font-size: 1em;
+      background: #1e90ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>AMS Digital Services</h1>
+    <p>Strategy. Execution. Results.</p>
+  </header>
+
+  <section class="services">
+    <div class="service-card">
+      <h3>Strategy & Analysis</h3>
+      <p>We help you understand the market, build strong plans, and execute ideas that work.</p>
+    </div>
+    <div class="service-card">
+      <h3>Product Research</h3>
+      <p>Find winning products or services with data-backed research and competitive insight.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Get in Touch</h2>
+    <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 AMS Digital Services. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
