@@ -1394,47 +1394,7 @@
         const loading = submitBtn?.querySelector('.loading');
 
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-             //   e.preventDefault();
-                
-                // Show loading state
-                if (btnText && loading && submitBtn) {
-                    btnText.style.display = 'none';
-                    loading.style.display = 'inline-block';
-                    submitBtn.disabled = true;
-                }
-                
-                // Hide previous messages
-                if (successMessage) successMessage.style.display = 'none';
-                if (errorMessage) errorMessage.style.display = 'none';
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    // Reset button state
-                    if (btnText && loading && submitBtn) {
-                        btnText.style.display = 'inline';
-                        loading.style.display = 'none';
-                        submitBtn.disabled = false;
-                    }
-                    
-                    // Check if form is valid
-                    const requiredFields = contactForm.querySelectorAll('[required]');
-                    let isValid = true;
-                    
-                    requiredFields.forEach(field => {
-                        if (!field.value.trim()) {
-                            isValid = false;
-                        }
-                    });
-                    
-                    if (isValid && successMessage) {
-                        successMessage.style.display = 'block';
-                        contactForm.reset();
-                    } else if (errorMessage) {
-                        errorMessage.style.display = 'block';
-                    }
-                }, 2000);
-            });
+            
         }
 
         // Newsletter form handling
