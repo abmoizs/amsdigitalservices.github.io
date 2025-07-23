@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMS Digital Services - Elevating Visions. Enduring Value.</title>
     <link rel="icon" type="image/png" href="ChatGPT Image Jul 21, 2025, 12_54_09 AM.png" sizes="64x64">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -14,11 +17,98 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
             background: #000;
             overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 30%, #f1f3f4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: curtainFade 1s ease-in-out 4s forwards;
+        }
+
+        .loading-logo {
+            font-size: 8rem;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            gap: 0.1em;
+            letter-spacing: -0.05em;
+        }
+
+        .loading-logo .letter {
+            opacity: 0;
+            transform: translateY(50px) scale(0.8);
+            display: inline-block;
+            position: relative;
+        }
+
+        .loading-logo .letter.a {
+            color: #2d2d2d;
+            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+        }
+
+        .loading-logo .letter.m {
+            color: #c41e3a;
+            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1s forwards;
+        }
+
+        .loading-logo .letter.s {
+            color: #2d2d2d;
+            animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s forwards;
+        }
+
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            60% {
+                transform: translateY(-10px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                text-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+            }
+        }
+
+        @keyframes curtainFade {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            animation: contentReveal 1s ease-out 5s forwards;
+        }
+
+        @keyframes contentReveal {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .container {
@@ -48,9 +138,10 @@
 
         .logo {
             font-size: 32px;
-            font-weight: bold;
+            font-weight: 800;
             color: #fff;
             transition: transform 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .logo:hover {
@@ -71,6 +162,7 @@
             color: #fff;
             text-decoration: none;
             font-weight: 500;
+            font-size: 16px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             padding: 5px 0;
@@ -102,6 +194,8 @@
             flex-direction: column;
             cursor: pointer;
             padding: 5px;
+            background: none;
+            border: none;
         }
 
         .mobile-menu-btn span {
@@ -110,6 +204,7 @@
             background: #fff;
             margin: 3px 0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
         }
 
         .mobile-menu-btn.active span:nth-child(1) {
@@ -144,7 +239,7 @@
             right: 0;
             bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
-            animation: pulseGlow 4s ease-in-out infinite;
+            animation: pulseGlow 4s ease-in-out infinite 5s;
         }
 
         @keyframes pulseGlow {
@@ -155,7 +250,6 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
         .hero h1 {
@@ -163,7 +257,9 @@
             margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: -2px;
-            animation: slideInLeft 1s ease-out both;
+            opacity: 0;
+            transform: translateX(-100px);
+            animation: slideInLeft 1s ease-out 5.5s forwards;
         }
 
         .hero .tagline {
@@ -171,7 +267,9 @@
             margin-bottom: 30px;
             color: #ff0000;
             font-weight: 300;
-            animation: slideInRight 1s ease-out 0.3s both;
+            opacity: 0;
+            transform: translateX(100px);
+            animation: slideInRight 1s ease-out 5.8s forwards;
         }
 
         .hero p {
@@ -180,8 +278,9 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out 6.1s forwards;
         }
 
         .cta-button {
@@ -196,7 +295,9 @@
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-            animation: bounceIn 1s ease-out 0.9s both;
+            opacity: 0;
+            transform: scale(0.3);
+            animation: bounceIn 1s ease-out 6.4s forwards;
         }
 
         .cta-button::before {
@@ -440,6 +541,63 @@
             box-shadow: 0 15px 40px rgba(255, 0, 0, 0.4);
         }
 
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #fff;
+        }
+
+        .newsletter h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff0000;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+        }
+
         /* About Section */
         .about {
             padding: 100px 0;
@@ -641,61 +799,38 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Newsletter Signup */
-        .newsletter {
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
-            padding: 80px 0;
-            text-align: center;
+        /* Success/Error Messages */
+        .success-message, .error-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+            animation: fadeInUp 0.5s ease;
         }
 
-        .newsletter-content {
-            max-width: 600px;
-            margin: 0 auto;
-            color: #fff;
+        .success-message {
+            background: #4CAF50;
+            color: white;
         }
 
-        .newsletter h3 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ff0000;
+        .error-message {
+            background: #f44336;
+            color: white;
         }
 
-        .newsletter p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
         }
 
-        .newsletter-form {
-            display: flex;
-            gap: 15px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .newsletter-form button {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-            color: #fff;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Animations */
@@ -749,6 +884,10 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .loading-logo {
+                font-size: 6rem;
+            }
+
             .nav-links {
                 position: fixed;
                 top: 70px;
@@ -774,19 +913,6 @@
 
             .hero {
                 padding: 0 20px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-                line-height: 1.2;
-            }
-
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
             }
 
             .section-title {
@@ -833,6 +959,10 @@
         }
 
         @media (max-width: 480px) {
+            .loading-logo {
+                font-size: 4rem;
+            }
+
             .container {
                 padding: 0 15px;
             }
@@ -845,366 +975,344 @@
                 font-size: 24px;
             }
 
-            .services {
+            .services, .about, .payment, .contact-form-section, .newsletter {
                 padding: 60px 0;
             }
-
-            .about {
-                padding: 60px 0;
-            }
-
-            .payment {
-                padding: 60px 0;
-            }
-
-            .contact-form-section {
-                padding: 60px 0;
-            }
-
-            .newsletter {
-                padding: 60px 0;
-            }
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success Message */
-        .success-message {
-            background: #4CAF50;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: none;
-            animation: fadeInUp 0.5s ease;
-        }
-
-        .error-message {
-            background: #f44336;
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: none;
-            animation: fadeInUp 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <span class="a">A</span><span class="m">M</span><span class="s">S</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact-form">Contact</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#payment">Payment</a></li>
-                <li><a href="#newsletter">Newsletter</a></li>
-            </ul>
-            <div class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Elevating Visions.<br>Enduring Value.</h1>
-            <p class="tagline">Where Innovation Becomes Infrastructure.</p>
-            <p>Transform your digital presence with expert analysis, strategic planning, and innovative solutions tailored to your unique business needs.</p>
-            <a href="#services" class="cta-button">Explore Our Services</a>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-logo">
+            <span class="letter a">A</span>
+            <span class="letter m">m</span>
+            <span class="letter s">s</span>
         </div>
-    </section>
+    </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Analysis Services & Custom Plans</h3>
-                    <p>Comprehensive business analysis with tailored strategies designed specifically for your industry and goals. We dive deep into your operations to identify opportunities and create actionable roadmaps for sustainable growth.</p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <nav class="container">
+                <div class="logo">
+                    <span class="a">A</span><span class="m">M</span><span class="s">S</span>
                 </div>
-                <div class="service-card">
-                    <h3>YouTube Growth Strategy</h3>
-                    <p>Accelerate your YouTube channel's success with proven growth strategies, content optimization, and audience engagement techniques. From channel setup to viral content creation, we help you build a thriving online presence.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Business Launch Plan</h3>
-                    <p>Turn your entrepreneurial vision into reality with our comprehensive business launch planning. We guide you through market research, competitive analysis, and strategic planning to ensure a successful market entry.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Digital Strategy & Roadmap</h3>
-                    <p>Navigate the digital landscape with confidence through our strategic roadmapping services. We create clear, actionable digital transformation plans that align with your business objectives and drive measurable results.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Product & Brand Analysis</h3>
-                    <p>Unlock your brand's potential with in-depth product and brand analysis. We evaluate market positioning, competitive advantages, and customer perception to optimize your brand strategy for maximum impact.</p>
-                </div>
-                <div class="service-card">
-                    <h3>LinkedIn Profile Optimization</h3>
-                    <p>Elevate your professional presence and accelerate your career growth with expertly optimized LinkedIn profiles. We help job seekers and professionals build compelling profiles that attract opportunities and showcase expertise.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Financial Analysis & Advisory</h3>
-                    <p>Make informed financial decisions with our comprehensive analysis and advisory services. From investment strategies to financial planning, we provide expert guidance to secure your financial future and business growth.</p>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact-form">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#payment">Payment</a></li>
+                    <li><a href="#newsletter">Newsletter</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Elevating Visions.<br>Enduring Value.</h1>
+                <p class="tagline">Where Innovation Becomes Infrastructure.</p>
+                <p>Transform your digital presence with expert analysis, strategic planning, and innovative solutions tailored to your unique business needs.</p>
+                <a href="#services" class="cta-button">Explore Our Services</a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Analysis Services & Custom Plans</h3>
+                        <p>Comprehensive business analysis with tailored strategies designed specifically for your industry and goals. We dive deep into your operations to identify opportunities and create actionable roadmaps for sustainable growth.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>YouTube Growth Strategy</h3>
+                        <p>Accelerate your YouTube channel's success with proven growth strategies, content optimization, and audience engagement techniques. From channel setup to viral content creation, we help you build a thriving online presence.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Business Launch Plan</h3>
+                        <p>Turn your entrepreneurial vision into reality with our comprehensive business launch planning. We guide you through market research, competitive analysis, and strategic planning to ensure a successful market entry.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Digital Strategy & Roadmap</h3>
+                        <p>Navigate the digital landscape with confidence through our strategic roadmapping services. We create clear, actionable digital transformation plans that align with your business objectives and drive measurable results.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Product & Brand Analysis</h3>
+                        <p>Unlock your brand's potential with in-depth product and brand analysis. We evaluate market positioning, competitive advantages, and customer perception to optimize your brand strategy for maximum impact.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>LinkedIn Profile Optimization</h3>
+                        <p>Elevate your professional presence and accelerate your career growth with expertly optimized LinkedIn profiles. We help job seekers and professionals build compelling profiles that attract opportunities and showcase expertise.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Financial Analysis & Advisory</h3>
+                        <p>Make informed financial decisions with our comprehensive analysis and advisory services. From investment strategies to financial planning, we provide expert guidance to secure your financial future and business growth.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact-form" class="contact-form-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="form-container">
-                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xkgzgllz" method="POST">
-                    <div class="success-message" id="successMessage">
-                        Thank you for your message! We'll get back to you within 24 hours.
-                    </div>
-                    <div class="error-message" id="errorMessage">
-                        Please fill in all required fields correctly.
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" id="firstName" name="firstName" required>
-                            <label for="firstName">First Name *</label>
+        <!-- Contact Form Section -->
+        <section id="contact-form" class="contact-form-section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="form-container">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xkgzgllz" method="POST">
+                        <div class="success-message" id="successMessage">
+                            Thank you for your message! We'll get back to you within 24 hours.
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="lastName" name="lastName" required>
-                            <label for="lastName">Last Name *</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email Address *</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" id="phone" name="phone">
-                            <label for="phone">Phone Number</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select id="service" name="service" required>
-                            <option value="">Select a Service</option>
-                            <option value="analysis">Analysis Services & Custom Plans</option>
-                            <option value="youtube">YouTube Growth Strategy</option>
-                            <option value="business-launch">Business Launch Plan</option>
-                            <option value="digital-strategy">Digital Strategy & Roadmap</option>
-                            <option value="brand-analysis">Product & Brand Analysis</option>
-                            <option value="linkedin">LinkedIn Profile Optimization</option>
-                            <option value="financial">Financial Analysis & Advisory</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <label for="service">Service Interested In *</label>
-                    </div>
-
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                        <label for="message">Your Message *</label>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="newsletter" name="newsletter">
-                        <label for="newsletter">Subscribe to our newsletter for updates and tips</label>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="privacy" name="privacy" required>
-                        <label for="privacy">I agree to the privacy policy and terms of service *</label>
-                    </div>
-
-                    <input type="hidden" name="_replyto" value="desk@amsdigitalservices.com">
-                    <input type="hidden" name="_subject" value="New Contact Form Submission from Website">
-
-
-                    <button type="submit" class="submit-btn">
-                        <span class="btn-text">Send Message</span>
-                        <span class="loading" style="display: none;"></span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h3>Stay Updated</h3>
-                <p>Get the latest insights, tips, and exclusive offers delivered straight to your inbox.</p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" placeholder="Enter your email" required id="newsletterEmail">
-                    <button type="submit">Subscribe</button>
-                </form>
-                <div class="success-message" id="newsletterSuccess">
-                    Welcome to our newsletter! Check your email for confirmation.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About AMS Digital Services</h2>
-                    <h3>Abdul Moiz Shams</h3>
-                    <p><strong>Founder of AMS Digital Services</strong></p>
-                    <p>As a dedicated analyst and digital strategist, I've built my career on transforming visions into measurable results. My passion lies in helping local businesses and professionals unlock their full potential through strategic analysis, innovative digital solutions, and personalized growth strategies.</p>
-                    <p>With years of experience in business analysis, digital marketing, and strategic planning, I've had the privilege of working with diverse clients across various industries. My approach combines data-driven insights with creative problem-solving to deliver solutions that don't just meet expectations—they exceed them.</p>
-                    <p>At AMS Digital Services, we believe that every business has unique potential waiting to be unleashed. Through comprehensive analysis, strategic planning, and continuous optimization, we help our clients navigate the digital landscape and achieve sustainable growth.</p>
-                    
-                    <div class="contact-info">
-                        <p><strong>General Inquiries:</strong> <a href="mailto:desk@amsdigitalservices.com">desk@amsdigitalservices.com</a></p>
-                        <p><strong>Direct Contact:</strong> <a href="mailto:abdulmoiz@amsdigitalservices.com">abdulmoiz@amsdigitalservices.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:+923229892928">+92 322 989 2928</a></p>
-                    </div>
-
-                    <div class="social-icons">
-                        <a href="#" class="social-icon" title="Twitter/X">𝕏</a>
-                        <a href="#" class="social-icon" title="Instagram">📷</a>
-                        <a href="#" class="social-icon" title="Facebook">f</a>
-                        <a href="#" class="social-icon" title="LinkedIn">in</a>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <div style="background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); height: 400px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: white; font-weight: bold;">
-                        <span style="color: #fff;">A</span><span style="color: #fff;">M</span><span style="color: #fff;">S</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Section -->
-    <section id="payment" class="payment">
-        <div class="container">
-            <div class="payment-content">
-                <h2 class="section-title">Secure Payment Options</h2>
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 20px;">Choose your preferred payment method for seamless transactions</p>
-                
-                <div class="payment-options">
-                    <div class="payment-card featured">
-                        <h3>RedotPay - Featured Partner</h3>
-                        <p>Join thousands of satisfied users with our premier payment solution. Experience the future of digital payments with enhanced security and convenience.</p>
-                        
-                        <div class="redot-benefits">
-                            <h4 style="margin-bottom: 20px;">Exclusive Benefits:</h4>
-                            <ul>
-                                <li>Instant payment processing</li>
-                                <li>Advanced security encryption</li>
-                                <li>Multi-currency support</li>
-                                <li>24/7 customer support</li>
-                                <li>Low transaction fees</li>
-                                <li>Mobile-first design</li>
-                                <li>Seamless integration</li>
-                            </ul>
+                        <div class="error-message" id="errorMessage">
+                            Please fill in all required fields correctly.
                         </div>
                         
-                        <a href="https://url.hk/i/en/ggh12" target="_blank" rel="noopener noreferrer" class="signup-button">Sign Up Through AMS & Save</a>
-                        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Get exclusive rates and priority support when you sign up through our affiliate program</p>
-                    </div>
-                    
-                    <div class="payment-card">
-                        <h3>Binance Pay</h3>
-                        <p>Secure cryptocurrency payments with Binance Pay. Fast, reliable, and trusted by millions of users worldwide for digital asset transactions.</p>
-                        <div style="margin-top: 20px;">
-                            <p><strong>✓ Available Now</strong></p>
-                            <p>Instant crypto payments</p>
-                            <p>Zero transaction fees</p>
-                            <p>Global acceptance</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="firstName" name="firstName" required>
+                                <label for="firstName">First Name *</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="lastName" name="lastName" required>
+                                <label for="lastName">Last Name *</label>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="payment-card">
-                        <h3>PayPal</h3>
-                        <p>The world's leading digital payment platform. Secure, fast, and convenient payment processing for your peace of mind.</p>
-                        <div style="margin-top: 20px;">
-                            <p><strong>🔄 Coming Soon</strong></p>
-                            <p>Buyer protection</p>
-                            <p>Easy refunds</p>
-                            <p>Global reach</p>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address *</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone">
+                                <label for="phone">Phone Number</label>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="payment-card">
-                        <h3>Direct Bank Transfer</h3>
-                        <p>Traditional bank transfer option for clients who prefer direct account-to-account payments. Secure and straightforward payment processing.</p>
-                        <div style="margin-top: 20px;">
-                            <p><strong>✓ Available Now</strong></p>
-                            <p>Direct account transfer</p>
-                            <p>Bank-level security</p>
-                            <p>Detailed transaction records</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 50px; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                    <h3 style="color: #ff0000; margin-bottom: 20px;">Why Choose RedotPay Through AMS?</h3>
-                    <p style="color: #666; line-height: 1.8;">As an official affiliate partner, we offer exclusive benefits to our clients who choose RedotPay. You'll receive priority customer support, reduced transaction fees, and access to premium features. Our partnership ensures you get the best possible experience while supporting our continued service excellence.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="logo" style="margin-bottom: 20px;">
-                <span class="a">A</span><span class="m">M</span><span class="s">S</span> Digital Services
+                        <div class="form-group">
+                            <select id="service" name="service" required>
+                                <option value="">Select a Service</option>
+                                <option value="analysis">Analysis Services & Custom Plans</option>
+                                <option value="youtube">YouTube Growth Strategy</option>
+                                <option value="business-launch">Business Launch Plan</option>
+                                <option value="digital-strategy">Digital Strategy & Roadmap</option>
+                                <option value="brand-analysis">Product & Brand Analysis</option>
+                                <option value="linkedin">LinkedIn Profile Optimization</option>
+                                <option value="financial">Financial Analysis & Advisory</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="service">Service Interested In *</label>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                            <label for="message">Your Message *</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">Subscribe to our newsletter for updates and tips</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">I agree to the privacy policy and terms of service *</label>
+                        </div>
+
+                        <input type="hidden" name="_replyto" value="desk@amsdigitalservices.com">
+                        <input type="hidden" name="_subject" value="New Contact Form Submission from Website">
+
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="loading" style="display: none;"></span>
+                        </button>
+                    </form>
+                </div>
             </div>
-            <p style="margin-bottom: 20px;">Elevating Visions. Enduring Value.</p>
-            <p>&copy; 2025 AMS Digital Services. All rights reserved.</p>
-            <p style="margin-top: 10px;">
-                <a href="mailto:desk@amsdigitalservices.com" style="color: #ff0000;">desk@amsdigitalservices.com</a> | 
-                <a href="tel:+923229892928" style="color: #ff0000;">+92 322 989 2928</a>
-            </p>
-        </div>
-    </footer>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h3>Stay Updated</h3>
+                    <p>Get the latest insights, tips, and exclusive offers delivered straight to your inbox.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" required id="newsletterEmail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div class="success-message" id="newsletterSuccess">
+                        Welcome to our newsletter! Check your email for confirmation.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>About AMS Digital Services</h2>
+                        <h3>Abdul Moiz Shams</h3>
+                        <p><strong>Founder of AMS Digital Services</strong></p>
+                        <p>As a dedicated analyst and digital strategist, I've built my career on transforming visions into measurable results. My passion lies in helping local businesses and professionals unlock their full potential through strategic analysis, innovative digital solutions, and personalized growth strategies.</p>
+                        <p>With years of experience in business analysis, digital marketing, and strategic planning, I've had the privilege of working with diverse clients across various industries. My approach combines data-driven insights with creative problem-solving to deliver solutions that don't just meet expectations—they exceed them.</p>
+                        <p>At AMS Digital Services, we believe that every business has unique potential waiting to be unleashed. Through comprehensive analysis, strategic planning, and continuous optimization, we help our clients navigate the digital landscape and achieve sustainable growth.</p>
+                        
+                        <div class="contact-info">
+                            <p><strong>General Inquiries:</strong> <a href="mailto:desk@amsdigitalservices.com">desk@amsdigitalservices.com</a></p>
+                            <p><strong>Direct Contact:</strong> <a href="mailto:abdulmoiz@amsdigitalservices.com">abdulmoiz@amsdigitalservices.com</a></p>
+                            <p><strong>Phone:</strong> <a href="tel:+923229892928">+92 322 989 2928</a></p>
+                        </div>
+
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" title="Twitter/X">𝕏</a>
+                            <a href="#" class="social-icon" title="Instagram">📷</a>
+                            <a href="#" class="social-icon" title="Facebook">f</a>
+                            <a href="#" class="social-icon" title="LinkedIn">in</a>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <div style="background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); height: 400px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: white; font-weight: bold;">
+                            <span style="color: #fff;">A</span><span style="color: #fff;">M</span><span style="color: #fff;">S</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Section -->
+        <section id="payment" class="payment">
+            <div class="container">
+                <div class="payment-content">
+                    <h2 class="section-title">Secure Payment Options</h2>
+                    <p style="font-size: 1.2rem; color: #666; margin-bottom: 20px;">Choose your preferred payment method for seamless transactions</p>
+                    
+                    <div class="payment-options">
+                        <div class="payment-card featured">
+                            <h3>RedotPay - Featured Partner</h3>
+                            <p>Join thousands of satisfied users with our premier payment solution. Experience the future of digital payments with enhanced security and convenience.</p>
+                            
+                            <div class="redot-benefits">
+                                <h4 style="margin-bottom: 20px;">Exclusive Benefits:</h4>
+                                <ul>
+                                    <li>Instant payment processing</li>
+                                    <li>Advanced security encryption</li>
+                                    <li>Multi-currency support</li>
+                                    <li>24/7 customer support</li>
+                                    <li>Low transaction fees</li>
+                                    <li>Mobile-first design</li>
+                                    <li>Seamless integration</li>
+                                </ul>
+                            </div>
+                            
+                            <a href="https://url.hk/i/en/ggh12" target="_blank" rel="noopener noreferrer" class="signup-button">Sign Up Through AMS & Save</a>
+                            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Get exclusive rates and priority support when you sign up through our affiliate program</p>
+                        </div>
+                        
+                        <div class="payment-card">
+                            <h3>Binance Pay</h3>
+                            <p>Secure cryptocurrency payments with Binance Pay. Fast, reliable, and trusted by millions of users worldwide for digital asset transactions.</p>
+                            <div style="margin-top: 20px;">
+                                <p><strong>✓ Available Now</strong></p>
+                                <p>Instant crypto payments</p>
+                                <p>Zero transaction fees</p>
+                                <p>Global acceptance</p>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-card">
+                            <h3>PayPal</h3>
+                            <p>The world's leading digital payment platform. Secure, fast, and convenient payment processing for your peace of mind.</p>
+                            <div style="margin-top: 20px;">
+                                <p><strong>🔄 Coming Soon</strong></p>
+                                <p>Buyer protection</p>
+                                <p>Easy refunds</p>
+                                <p>Global reach</p>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-card">
+                            <h3>Direct Bank Transfer</h3>
+                            <p>Traditional bank transfer option for clients who prefer direct account-to-account payments. Secure and straightforward payment processing.</p>
+                            <div style="margin-top: 20px;">
+                                <p><strong>✓ Available Now</strong></p>
+                                <p>Direct account transfer</p>
+                                <p>Bank-level security</p>
+                                <p>Detailed transaction records</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 50px; padding: 30px; background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <h3 style="color: #ff0000; margin-bottom: 20px;">Why Choose RedotPay Through AMS?</h3>
+                        <p style="color: #666; line-height: 1.8;">As an official affiliate partner, we offer exclusive benefits to our clients who choose RedotPay. You'll receive priority customer support, reduced transaction fees, and access to premium features. Our partnership ensures you get the best possible experience while supporting our continued service excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact">
+            <div class="container">
+                <div class="logo" style="margin-bottom: 20px;">
+                    <span class="a">A</span><span class="m">M</span><span class="s">S</span> Digital Services
+                </div>
+                <p style="margin-bottom: 20px;">Elevating Visions. Enduring Value.</p>
+                <p>&copy; 2025 AMS Digital Services. All rights reserved.</p>
+                <p style="margin-top: 10px;">
+                    <a href="mailto:desk@amsdigitalservices.com" style="color: #ff0000;">desk@amsdigitalservices.com</a> | 
+                    <a href="tel:+923229892928" style="color: #ff0000;">+92 322 989 2928</a>
+                </p>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle - Fixed implementation
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on links
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                navLinks.classList.remove('active');
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Prevent body scroll when menu is open
+                if (navLinks.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             });
-        });
+
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    mobileMenuBtn.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1223,10 +1331,12 @@
         // Header background opacity on scroll
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.98)';
-            } else {
-                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            if (header) {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(0, 0, 0, 0.98)';
+                } else {
+                    header.style.background = 'rgba(0, 0, 0, 0.95)';
+                }
             }
         });
 
@@ -1245,7 +1355,7 @@
             });
         }, observerOptions);
 
-        // Observe service cards and other elements
+        // Observe elements with initial setup
         document.querySelectorAll('.service-card, .payment-card, .about-text').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(50px)';
@@ -1253,92 +1363,97 @@
             observer.observe(card);
         });
 
+        // Enhanced card hover effects
+        document.querySelectorAll('.service-card, .payment-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section (starts after loading)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (hero && heroContent && window.pageYOffset > 0) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
         // Form handling
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
-        const submitBtn = contactForm.querySelector('.submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const loading = submitBtn.querySelector('.loading');
+        const submitBtn = contactForm?.querySelector('.submit-btn');
+        const btnText = submitBtn?.querySelector('.btn-text');
+        const loading = submitBtn?.querySelector('.loading');
 
-        
-            
-            // Show loading state
-            btnText.style.display = 'none';
-            loading.style.display = 'inline-block';
-            submitBtn.disabled = true;
-            
-            // Hide previous messages
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-            
-            // Simulate form submission (replace with actual form submission logic)
-            setTimeout(() => {
-                // Reset button state
-                btnText.style.display = 'inline';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // Check if form is valid (basic validation)
-                const requiredFields = contactForm.querySelectorAll('[required]');
-                let isValid = true;
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        isValid = false;
-                    }
-                });
-                
-                if (isValid) {
-                    successMessage.style.display = 'block';
-                    contactForm.reset();
-                    
-                    // Send email data (this would normally go to your backend)
-                    const formData = new FormData(contactForm);
-                    const emailData = {
-                        to: 'desk@amsdigitalservices.com',
-                        subject: 'New Contact Form Submission',
-                        firstName: formData.get('firstName'),
-                        lastName: formData.get('lastName'),
-                        email: formData.get('email'),
-                        phone: formData.get('phone'),
-                        service: formData.get('service'),
-                        message: formData.get('message'),
-                        newsletter: formData.get('newsletter')
-                    };
-                    
-                    console.log('Email data to be sent:', emailData);
-                    
-                } else {
-                    errorMessage.style.display = 'block';
+                // Show loading state
+                if (btnText && loading && submitBtn) {
+                    btnText.style.display = 'none';
+                    loading.style.display = 'inline-block';
+                    submitBtn.disabled = true;
                 }
-            }, 2000);
-        });
+                
+                // Hide previous messages
+                if (successMessage) successMessage.style.display = 'none';
+                if (errorMessage) errorMessage.style.display = 'none';
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Reset button state
+                    if (btnText && loading && submitBtn) {
+                        btnText.style.display = 'inline';
+                        loading.style.display = 'none';
+                        submitBtn.disabled = false;
+                    }
+                    
+                    // Check if form is valid
+                    const requiredFields = contactForm.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                        }
+                    });
+                    
+                    if (isValid && successMessage) {
+                        successMessage.style.display = 'block';
+                        contactForm.reset();
+                    } else if (errorMessage) {
+                        errorMessage.style.display = 'block';
+                    }
+                }, 2000);
+            });
+        }
 
         // Newsletter form handling
         const newsletterForm = document.getElementById('newsletterForm');
         const newsletterSuccess = document.getElementById('newsletterSuccess');
 
-        
-            const email = document.getElementById('newsletterEmail').value;
-            
-            if (email) {
-                // Simulate newsletter signup
-                setTimeout(() => {
-                    newsletterSuccess.style.display = 'block';
-                    newsletterForm.reset();
-                    
-                    // Newsletter signup data (this would normally go to your backend)
-                  //  const newsletterData = {
-                  //      email: email,
-                  //      source: 'website_newsletter',
-                   //     timestamp: new Date().toISOString()
-                   // };
-                //    
-                  //  console.log('Newsletter signup data:', newsletterData);
-     //           }, 1000);
-       //     }
-       // });
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('newsletterEmail')?.value;
+                
+                if (email && newsletterSuccess) {
+                    setTimeout(() => {
+                        newsletterSuccess.style.display = 'block';
+                        newsletterForm.reset();
+                    }, 1000);
+                }
+            });
+        }
 
         // Enhanced form label animations
         document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(input => {
@@ -1356,28 +1471,6 @@
             if (input.value) {
                 input.parentNode.classList.add('focused');
             }
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            const heroContent = document.querySelector('.hero-content');
-            
-            if (hero && heroContent) {
-                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
-
-        // Add smooth hover effects for cards
-        document.querySelectorAll('.service-card, .payment-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
         });
 
         // Auto-hide messages after 5 seconds
@@ -1401,7 +1494,14 @@
         if (successMessage) observer2.observe(successMessage, { attributes: true });
         if (errorMessage) observer2.observe(errorMessage, { attributes: true });
         if (newsletterSuccess) observer2.observe(newsletterSuccess, { attributes: true });
+
+        // Loading screen completion handler
+        setTimeout(() => {
+            const loadingScreen = document.querySelector('.loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+        }, 5000);
     </script>
 </body>
 </html>
-                
