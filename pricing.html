@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMS Digital Services - Pricing Packages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .package-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out;
+            color: #fff;
+        }
+
+        .package-card:nth-child(2) {
+            animation-delay: 0.2s;
+            transform: scale(1.05);
+            border: 3px solid #ff6b6b;
+        }
+
+        .package-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .package-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(255,107,107,0.4);
+        }
+
+        .package-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .package-price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+        .package-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            padding-left: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover {
+            color: #ff0000;
+            transform: translateX(5px);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .select-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .select-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .select-btn:hover::before {
+            left: 100%;
+        }
+
+        .select-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .select-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalSlideIn 0.4s ease-out;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #ff0000;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff0000;
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .auto-messages {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ff0000;
+        }
+
+        .auto-messages h4 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: messageSlide 0.5s ease-out;
+            color: #fff;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .package-card:nth-child(2) {
+                transform: none;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Growth Package</h1>
+        <p class="subtitle">Accelerate your business with our proven digital strategies</p>
+        
+        <div class="packages-grid">
+            <!-- Starter Strategy Package -->
+            <div class="package-card" data-package="starter">
+                <h3 class="package-title">Starter Strategy</h3>
+                <div class="package-price">$297</div>
+                <p class="package-description">Perfect for businesses just getting started with their digital presence</p>
+                <ul class="features-list">
+                    <li><strong>1:1 Business Consultation</strong><br>30-min call to understand your business plan and portfolio with 24h guidance</li>
+                    <li><strong>YouTube + Social Growth Plan</strong><br>Complete guide on how to improve your business through social media</li>
+                    <li><strong>Brand Audit with 3 Key Action Steps</strong><br>Comprehensive business model analysis with actionable recommendations</li>
+                    <li><strong>Final PDF Report with Custom Roadmap</strong><br>Detailed strategy document tailored to your business</li>
+                </ul>
+                <button class="select-btn" onclick="window.location.href='update.html?plan=starter#contact-form'">Get Started</button>
+            </div>
+
+            <!-- Growth Accelerator Package -->
+            <div class="package-card" data-package="growth">
+                <div class="popular-badge">MOST POPULAR</div>
+                <h3 class="package-title">Growth Accelerator</h3>
+                <div class="package-price">$597</div>
+                <p class="package-description">Comprehensive growth strategy for established businesses ready to scale</p>
+                <ul class="features-list">
+                    <li><strong>Custom Digital Strategy + Roadmap</strong><br>Tailored plan after analyzing your entire business model to boost growth</li>
+                    <li><strong>Competitor and Market Analysis</strong><br>In-depth research on competitors with optimal timing strategies</li>
+                    <li><strong>YouTube Growth Strategy + LinkedIn Optimization</strong><br>Complete social media growth package</li>
+                    <li><strong>3 Follow-ups via Email</strong><br>Ongoing support to ensure successful implementation</li>
+                    <li><strong>Priority 5-day Delivery</strong><br>Fast-track your growth with expedited service</li>
+                </ul>
+                <button class="select-btn" onclick="window.location.href='update.html?plan=growth#contact-form'">Accelerate Growth</button>
+            </div>
+
+            <!-- Enterprise Launch Plan -->
+            <div class="package-card" data-package="enterprise">
+                <h3 class="package-title">Enterprise Launch</h3>
+                <div class="package-price">$1,297</div>
+                <p class="package-description">Complete business launch solution with full-stack support and automation</p>
+                <ul class="features-list">
+                    <li><strong>Full-stack Analysis + Launch Plan</strong><br>Complete business infrastructure setup and strategy</li>
+                    <li><strong>Business Registration Support</strong><br>Help with legal business setup and compliance</li>
+                    <li><strong>Brand Identity + 1-month Content Plan</strong><br>Complete branding package with content strategy</li>
+                    <li><strong>Affiliate Revenue Setup</strong><br>Monetization strategies and affiliate program implementation</li>
+                    <li><strong>Direct Call & Dedicated Dashboard</strong><br>Personal support with custom tracking system</li>
+                    <li><strong>Email Marketing & Automation Setup</strong><br>Complete email system with automated sequences</li>
+                </ul>
+                <button class="select-btn" onclick="window.location.href='update.html?plan=enterprise#contact-form'">Launch Enterprise</button>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>
+</body>
+</html>
