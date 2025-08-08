@@ -1050,7 +1050,16 @@
         <section id="contact-form" class="contact-form-section">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
-                <div class="form-container">
+                
+<div id="autoMessages" class="auto-messages" style="display:none; margin-bottom:20px; background: rgba(255,255,255,0.05); padding:20px; border-radius:10px; border-left:4px solid #ff0000;">
+    <div id="generalMessage" class="message" style="margin-bottom:10px; background: rgba(255,255,255,0.1); padding:15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); color:#fff;">
+        <strong>✅ Form Submission Confirmed!</strong><br>
+        Please proceed to fill out the form completely. Our team will review your application and get back to you within 24 hours.
+    </div>
+    <div id="customMessage" class="message" style="background: rgba(255,255,255,0.1); padding:15px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); color:#fff;"></div>
+</div>
+
+<div class="form-container">
                     <form class="contact-form" id="contactForm" action="https://formspree.io/f/xkgzgllz" method="POST">
                         <div class="success-message" id="successMessage">
                             Thank you for your message! We'll get back to you within 24 hours.
@@ -1446,6 +1455,41 @@
                 loadingScreen.style.display = 'none';
             }
         }, 5000);
-    </script>
+    
+// --- Pricing Plan Auto Message Logic ---
+(function(){
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan');
+    if(plan){
+        const autoMessages = document.getElementById('autoMessages');
+        const customMsg = document.getElementById('customMessage');
+        const generalMsg = document.getElementById('generalMessage');
+        if(autoMessages && customMsg && generalMsg){
+            const customMessages = {
+                'starter': "🚀 <strong>Starter Strategy Package Selected!</strong><br>Perfect choice for getting started! Includes a personalized consultation, growth plan, brand audit, and custom roadmap.",
+                'growth': "⚡ <strong>Growth Accelerator Package Selected!</strong><br>Excellent choice for scaling your business! Includes tailored strategy, competitor analysis, YouTube & LinkedIn optimization, follow-ups, and priority delivery.",
+                'enterprise': "🏢 <strong>Enterprise Launch Plan Selected!</strong><br>Outstanding choice for serious growth! Includes full-stack analysis, registration support, brand identity, content plan, affiliate setup, dashboard, and automation."
+            };
+            customMsg.innerHTML = customMessages[plan] || "";
+            autoMessages.style.display = 'block';
+
+            // Prefill service dropdown if matches
+            const serviceSelect = document.getElementById('service');
+            if(serviceSelect){
+                if(plan === 'starter') serviceSelect.value = 'analysis';
+                if(plan === 'growth') serviceSelect.value = 'digital-strategy';
+                if(plan === 'enterprise') serviceSelect.value = 'business-launch';
+            }
+
+            // Scroll to form
+            const formSection = document.getElementById('contact-form');
+            if(formSection){
+                formSection.scrollIntoView({behavior:'smooth'});
+            }
+        }
+    }
+})();
+
+</script>
 </body>
 </html>
